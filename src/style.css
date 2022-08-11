@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+header {
+  font-size: 4rem;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.erledigte-Aufgaben {
+  font-size: 2rem;
+  border: solid 2px red;
+  min-width: 24vw;
+  justify-content: center;
+  margin-left: 1rem;
+}
+
+.erstellung-Aufgaben {
+  font-size: 2rem;
+  border: solid 2px blue;
+  min-width: 48vw;
+  justify-content: center;
+  margin: 0 2rem;
+}
+
+.aktive-Aufgaben {
+  font-size: 2rem;
+  border: solid 2px green;
+  min-width: 24vw;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center;
+}
+
+.Aufgaben-Karte {
+  display: flex;
+  border: solid 2px black;
+  margin: 1rem;
+  padding: 1rem;
+  justify-content: space-around;
+}
+
+.Aufgaben-Karte_Erstellung {
+  display: flex;
+  border: solid 2px black;
+  margin: 1rem;
+  padding: 1rem;
+  justify-content: space-around;
+}
