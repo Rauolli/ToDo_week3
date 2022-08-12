@@ -29,6 +29,17 @@
           <span class="material-symbols-outlined"> add </span>
           <span class="material-symbols-outlined"> delete </span>
         </div>
+        <div class="date-time">
+          <input type="date" id="todo-date">
+          <input type="time" id="todo-time">
+          <textarea id="todo-task" cols="25" rows="10"></textarea>
+          <button id="btn_date_time">Klick Mich!</button>
+        </div>
+        <div class="show-message">
+          <button class="close">X</button>
+          <h2 id="show-date"></h2><h2 id="show-time"></h2>
+          <p id="show-task"></p>
+        </div>
       </section>
       <section class="erstellung-Aufgaben">
         <div class="section-header">
@@ -53,6 +64,28 @@
         </div>
       </section>
     </main>
+    <script>
+      const date = document.getElementById('todo-date');
+      const time = document.getElementById('todo-time');
+      const task = document.getElementById('todo-task');
+
+      const showDate = document.getElementById('show-date');
+      const showTime = document.getElementById('show-time');
+      const showTask = document.getElementById('show-task');
+      const showBox = document.querySelector('.show-message')
+      const button = document.getElementById('btn_date_time');
+      const btnClose = document.querySelector('.close');
+      
+      button.addEventListener('click', (event) =>{
+        showDate.innerHTML = `Datum: ${date.value}`;
+        showTime.innerHTML = `Zeit: ${time.value}`;
+        showTask.innerHTML = `Aufgabe: ${task.value}`;
+        showBox.style.visibility = 'visible';
+      });
+
+      btnClose.addEventListener('click', (event)=> showBox.style.visibility = 'hidden');
+      
+    </script>
     <script src="./src/todo_class.js"></script>
     <script src="./src/index.js"></script>
   </body>

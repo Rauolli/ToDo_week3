@@ -65,3 +65,18 @@ main {
   padding: 1rem;
   justify-content: space-around;
 }
+
+.show-message{
+  position: relative;
+  left: 10%;
+  top: 10%;
+  background-color: gray;
+  border: 1px solid darkgray;
+  visibility: hidden;
+}
+
+.close{
+  border-radius: 50%;
+  width: 2em;
+  height: 2em
+}
