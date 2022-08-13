@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./src/ollisStyle.css" />
     <link rel="icon" href="/img/to-do-list.svg" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
     />
-
     <title>To Do - Liste</title>
   </head>
   <body>
     <header>
       <nav>
-        <h1>To-Do-Liste</h1>
+        <h1>TO-DO-Liste</h1>
       </nav>
     </header>
     <main>
@@ -35,11 +35,41 @@
           <h2>erstelle deine Aufgabe</h2>
         </div>
         <div class="Aufgaben-Karte_Erstellung">
-          <span class="material-symbols-outlined"> add </span>
-          <form action="#">
+          <!-- <span class="material-symbols-outlined"> add </span> -->
+          <!-- <form action="#">
             <input type="text" name="task" id="task" />
-          </form>
-        </div>
+          </form> -->
+        <!--###### Eingabebereich für ToDo ###########-->
+        <div class="date-time">
+          <label for="todo-date">Datum:</label>
+          <input type="date" id="todo-date">
+          <label for="todo-time">Zeit:</label>
+          <input type="time" id="todo-time">
+          <label for="todo-task">Aufgabe:</label>
+          <input type="text" id="todo-task" placeholder="To-Do">
+          <button id="btn_date_time" class="symbol-btn material-symbols-outlined">add</button>
+        </div> 
+      </div>
+      <!--***** Ausgabe und Bestätigung für die ToDo ****-->
+      <div class="show-message">
+        <button class="symbol-btn material-symbols-outlined" id="btn-close">close</button>
+        <table>
+          <tr><td>Aufgabe:</td><td id="show-task"></td></tr>
+          <tr><td>Datum:</td><td id="show-date"></td></tr>
+          <tr><td>Zeit:</td><td id="show-time"></td></tr>
+          <tr>
+          <td><label for="todo-comment">Kommentar:</label></td>
+          <td><textarea name="todo-comment" id="todo-comment" cols="30" rows="5"></textarea></td> 
+          </tr>      
+        <tr>
+          <td>
+            <button id="btn-add" class="symbol-btn material-symbols-outlined blue"> add </button>        
+          <!-- <button class="symbol-btn material-symbols-outlined green"> done </button> -->
+            <button  id="btn-delete" class="symbol-btn material-symbols-outlined red"> delete </button>
+          </td>
+        </tr>
+      </table>
+      </div>
       </section>
       <section class="aktive-Aufgaben">
         <div class="section-header">
@@ -53,6 +83,7 @@
         </div>
       </section>
     </main>
+    <script src="./src/todo_classes.js"></script>
     <script src="./src/index.js"></script>
   </body>
 </html>
