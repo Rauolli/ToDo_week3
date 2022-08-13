@@ -1,7 +1,14 @@
-* {
+:root{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+
+*,
+::before,
+::after{
+  box-sizing: inherit;  
 }
 
 html {
@@ -66,17 +73,3 @@ main {
   justify-content: space-around;
 }
 
-.show-message{
-  position: relative;
-  left: 10%;
-  top: 10%;
-  background-color: gray;
-  border: 1px solid darkgray;
-  visibility: hidden;
-}
-
-.close{
-  border-radius: 50%;
-  width: 2em;
-  height: 2em
-}
