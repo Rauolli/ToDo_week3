@@ -64,13 +64,11 @@ const timeStr = new TodoTime(time);
 
 const task = document.getElementById('todo-task').value;
 
-const showDate = document.getElementById('show-date');
-const showTime = document.getElementById('show-time');
-const showTask = document.getElementById('show-task');
+
 
 
 const showBox = document.querySelector('.show-message');
-const button = document.getElementById('btn_date_time');
+const btnCreateTask = document.getElementById('btn_date_time');
 const btnClose = document.querySelector('#btn-close');
 const btnDelete = document.querySelector('#btn-delete');
 const btnAdd = document.querySelector('#btn-add');
@@ -83,6 +81,9 @@ btnClose.addEventListener('click', (event)=> showBox.style.visibility = 'hidden'
 // ********* Funktionen zur DOM-Manipulation *************
 // Aufgabenfeld befüllen
 const fillToDoField = ()=>{
+    const showDate = document.getElementById('show-date');
+    const showTime = document.getElementById('show-time');
+    const showTask = document.getElementById('show-task');
     showTask.innerHTML = `${task}`;
     showDate.innerHTML = `${dateStr.toString()}`;
     showTime.innerHTML = `${timeStr.toString()}`;
@@ -96,13 +97,16 @@ const createObject = ()=>{
 }
 
 const deleteToDoField = () =>{
+    const showDate = document.getElementById('show-date');
+    const showTime = document.getElementById('show-time');
+    const showTask = document.getElementById('show-task');
     showTask.innerHTML = '';
     showDate.innerHTML = '';
     showTime.innerHTML = '';
     document.querySelector('#todo-comment').value = '';
 }
 
-button.addEventListener('click', fillToDoField);
+btnCreateTask.addEventListener('click', fillToDoField);
 btnAdd.addEventListener('click', createObject);
 btnDelete.addEventListener('click', deleteToDoField);
       // Aufgabenfeld anzeigen
