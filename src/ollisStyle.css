@@ -1,0 +1,54 @@
+body{
+    background-color: rgb(234, 248, 234);
+    font-family: Arial, Helvetica, sans-serif;
+    color:gray;
+}
+
+.show-message{
+    min-width: 80%;
+    position: relative;
+    font-size: 0.8em;
+    margin: 0.8em;
+    padding: 0 0 0.5em 0.5em;
+    border-radius: 0.8em;
+    background-color: rgb(253, 255, 253);
+    border: 1px solid darkgray;
+    visibility: hidden;
+    box-shadow: 2px 4px 6px rgba(84, 87, 84, 0.1);;
+  }
+
+  .show-message li{
+    list-style: none;
+    padding-bottom: 0.5em;;
+  }
+   
+  .symbol-btn{ 
+    border-radius: 50%;
+    margin-top: 0.4em;
+    border: 2px solid rgb(178, 177, 177);
+    background-color: inherit;
+    color: rgb(178, 177, 177);
+    width: 1.4em;
+    height: 1.4em; 
+  }
+
+  .symbol-btn:hover{
+      background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  
+
+  .green{
+    border: 2px solid rgb(76, 138, 87); 
+    color: rgb(76, 138, 87);
+  }
+
+  .red{
+    border: 2px solid rgb(189, 97, 97); 
+    color: rgb(189, 97, 97);
+  }
+
+  .blue{
+    border: 2px solid rgb(111, 112, 188); 
+    color: rgb(111, 112, 188); 
+  }
