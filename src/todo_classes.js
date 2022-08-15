@@ -66,24 +66,72 @@ class TodoList{
     #todoList = [];
     #finishedTodoList = [];
     #activeTodoList = [];
+    #today; 
+    #day;
+    #month;
+    #year;
+    #hour;
+    #minute;
 
     constructor(){
+        this.#today = new Date();
+        this.#day = this.#today.getDay();
+        this.#month = this.#today.getMonth() + 1;
+        this.#year = this.#today.getFullYear();
+        this.#hour = this.#today.getHours();
+        this.#minute = this.#today.getMinutes();
     }
 
     add(todo){
         if (this.#todoList.includes(todo)) {
             return;    
         }else{
-            this.#todoList.push(todo);    
+            this.#todoList.push(todo);
+            this.updateActiveList();
+            this.updateFineshedTodoList();    
+        }
+    }
+
+    delete(todo){
+        this.#todoList = this.#todoList.map(item => !item.at(todo));
+        this.updateActiveList();
+        this.updateFineshedTodoList();
+    }
+
+    updateActiveList(){
+        this.#activeTodoList = this.#todoList.map(todo => {
+            if (!todo.fineshed && this.checkIfTodoIsInFuture(todo)) {
+                return todo;   
+            }            
+        });
+    }
+
+    updateFineshedTodoList(){
+        this.#finishedTodoList = this.#todoList.map(todo => {
+            if (todo.fineshed || !this.checkIfTodoIsInFuture(todo)) {
+                return todo;
+            }
+        })
+    }
+
+
+
+    checkIfTodoIsInFuture(todo){
+        if (todo.year < this.#year) {
+            return false;
+        }else if(todo.month < this.#month){
+            return false;
+        }else if (todo.day < this.#day) {
+            return false;
+        }else if (todo.hour < this.#hour){
+            return;
+        }else if (todo.minute <= this.#minute){
+            return false;
+        }else{
+            return true;
         }
     }
 }
-class TodoApp{
 
-    #todo;
-    #todoList;
-    
-
-}
 
 // export { TodoDate, TodoTime, ToDo, TodoApp};
