@@ -1,137 +1,46 @@
-class TodoDate{
-    #year;
-    #month;
-    #day;
+// ---- Test Test Test Test --------
 
-    constructor(value){
-        const valueArr = value.split('-');
-        this.#year = valueArr[0];
-        this.#month = valueArr[1];
-        this.#day = valueArr[2];
-    }
+// test-Array mit 10 Todo-Objects
+const toDoArr = [
+    new ToDo(new TodoDate("2022-08-17"), new TodoTime("09:15"), "Standup", "1"),
+    new ToDo(new TodoDate("2022-08-18"), new TodoTime("08:15"), "Coding", "2"),
+    new ToDo(new TodoDate("2022-08-19"), new TodoTime("07:15"), "Chillin", "3"),
+    new ToDo(new TodoDate("2022-08-20"), new TodoTime("06:15"), "Sleepin", "4"),
+    new ToDo(new TodoDate("2022-08-16"), new TodoTime("18:15"), "Eating", "5"),
+    new ToDo(new TodoDate("2022-08-16"), new TodoTime("09:15"), "Standup", "6"),
+    new ToDo(new TodoDate("2022-08-13"), new TodoTime("18:15"), "Good Morning", "7"),
+    new ToDo(new TodoDate("2022-08-12"), new TodoTime("19:15"), "Bush my teeth", "8"),
+    new ToDo(new TodoDate("2022-08-16"), new TodoTime("20:15"), "Washing", "9"),
+    new ToDo(new TodoDate("2022-08-15"), new TodoTime("21:15"), "Eating again", "10")
+]
 
-    get year(){ return this.#year};
-    get month(){ return this.#month};
-    get day(){ return this.#day};
 
-    toString(){ return `${this.#day}.${this.#month}.${this.#year}`};
+// toDoArr.updateActiveList();
+// toDoArr.updateFineshedList();
+
+
+/* toDoArr.forEach(todo => console.log(`
+                                     Aufgabe: ${todo.task}
+                                     Datum: ${todo.date}
+                                     Zeit: ${todo.time}
+                                     Kommentar: ${todo.comment}`));*/
+
+let toDoListe = new TodoList();
+for (const todo of toDoArr) {
+    toDoListe.add(todo);   
 }
 
-class TodoTime{
-    #hour;
-    #minute;
-
-    constructor(value){
-        const valueArr = value.split(':');
-        this.#hour = valueArr[0];
-        this.#minute = valueArr[1];
-    }
-
-    get hour(){ return this.#hour};
-    get minute(){ return this.#minute};
-
-    toString(){ return `${this.#hour}:${this.#minute}`};
-}
-
-class ToDo{
-    #date;
-    #time;
-    #task;
-    #comment = '';
-    #finished = false;
-
-    constructor(todoDate, todoTime, task, comment ){
-        this.#date = todoDate;
-        this.#time = todoTime;
-        this.#task = task;
-        this.#comment = comment;
-    }
-
-    get date(){ return this.#date};
-    get time(){ return this.#time};
-    get task(){ return this.#task};
-    get comment(){ return this.#comment};
-    get fineshed(){ return this.#finished};
-    set fineshed(value){
-        if(typeof value === 'boolean'){ 
-            this.#finished = value;
-        }
-        else{
-            this.#finished = !this.#finished;
-        }
-    };   
-}
-
-class TodoList{
-    #todoList = [];
-    #finishedTodoList = [];
-    #activeTodoList = [];
-    #today; 
-    #day;
-    #month;
-    #year;
-    #hour;
-    #minute;
-
-    constructor(){
-        this.#today = new Date();
-        this.#day = this.#today.getDay();
-        this.#month = this.#today.getMonth() + 1;
-        this.#year = this.#today.getFullYear();
-        this.#hour = this.#today.getHours();
-        this.#minute = this.#today.getMinutes();
-    }
-
-    add(todo){
-        if (this.#todoList.includes(todo)) {
-            return;    
-        }else{
-            this.#todoList.push(todo);
-            this.updateActiveList();
-            this.updateFineshedTodoList();    
-        }
-    }
-
-    delete(todo){
-        this.#todoList = this.#todoList.map(item => !item.at(todo));
-        this.updateActiveList();
-        this.updateFineshedTodoList();
-    }
-
-    updateActiveList(){
-        this.#activeTodoList = this.#todoList.map(todo => {
-            if (!todo.fineshed && this.checkIfTodoIsInFuture(todo)) {
-                return todo;   
-            }            
-        });
-    }
-
-    updateFineshedTodoList(){
-        this.#finishedTodoList = this.#todoList.map(todo => {
-            if (todo.fineshed || !this.checkIfTodoIsInFuture(todo)) {
-                return todo;
-            }
-        })
-    }
+//toDoListe.setTodoToFineshed(toDoArr[6]);
+//toDoListe.setTodoToFineshed(toDoArr[7]);
+//toDoListe.setTodoToFineshed(toDoArr[9]);
 
 
-
-    checkIfTodoIsInFuture(todo){
-        if (todo.year < this.#year) {
-            return false;
-        }else if(todo.month < this.#month){
-            return false;
-        }else if (todo.day < this.#day) {
-            return false;
-        }else if (todo.hour < this.#hour){
-            return;
-        }else if (todo.minute <= this.#minute){
-            return false;
-        }else{
-            return true;
-        }
-    }
-}
+console.log("++++ Gesamte ToDo-Liste +++++")
+console.log(toDoListe.allToString());
+console.log("++++ Aktive ToDo-Liste +++++")
+console.log(toDoListe.activeListToString());
+console.log("++++ Erledigte ToDo-Liste +++++")
+console.log(toDoListe.finishedListToString());
 
 
 // export { TodoDate, TodoTime, ToDo, TodoApp};
