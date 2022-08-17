@@ -10,10 +10,10 @@ body{
     font-size: 0.8em;
     margin: 0.8em;
     padding: 0 0 0.5em 0.5em;
-    border-radius: 0.8em;
+    border-radius: 0.4em;
     background-color: rgb(253, 255, 253);
     border: 1px solid darkgray;
-    visibility: hidden;
+    /* visibility: hidden; */
     box-shadow: 2px 4px 6px rgba(84, 87, 84, 0.1);;
   }
 
