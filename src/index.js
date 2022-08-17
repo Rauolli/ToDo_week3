@@ -2,8 +2,11 @@
 // ------- Input-Felder lesen -------------------
 
 class TodoApp{
+    //// todo; todo-list, active-todo-list and finished-todo-list
     #todo;
     #todoList = [];
+    #activeTodoList = [];
+    #finishedTodoList = [];
     #todoDate;
     #todoTime;
 

@@ -1,30 +1,35 @@
 // -------------- ToDo-Class for ToDo-Objects --------------------------
 class ToDo{
     #id = '';
-    #date;
-    #time;
+    #dateTime;
+    #originDateTime;
+    #timeStr;
+    #dateStr;
     #task;
     #comment = '';
     #finished = false;
 
     constructor(todoDate, todoTime, task, comment ){
-        this.#date = new TodoDate(todoDate);
-        this.#time = new TodoTime(todoTime);
+        this.#dateTime = new TodoDateTime(todoDate, todoTime); 
+        this.#timeStr = this.#dateTime.asTimeStr; 
+        this.#dateStr = this.#dateTime.asGermDateStr; 
         this.#task = task;
         this.#comment = comment;
         this.setId();
+        // making a datype Date() to compare with the actual date    
+        this.#originDateTime = new Date(parseInt(this.#dateTime.year), parseInt(this.#dateTime.month)-1, parseInt(this.#dateTime.day), parseInt(this.#dateTime.hour), parseInt(this.#dateTime.minute));
     }
 
-    get date(){ return this.#date};
-    get time(){ return this.#time};
+    
+    get dateTime(){ return this.#originDateTime};
     get task(){ return this.#task};
     get comment(){ return this.#comment};
     get fineshed(){ return this.#finished};
-    get minute(){ return this.#time.minute};
-    get hour(){ return this.#time.hour};
-    get day(){ return this.#date.day};
-    get month(){ return this.#date.month};
-    get year(){ return this.#date.year};
+    get minute(){ return this.#dateTime.minute};
+    get hour(){ return this.#dateTime.hour};
+    get day(){ return this.#dateTime.day};
+    get month(){ return this.#dateTime.month};
+    get year(){ return this.#dateTime.year};
     get id(){ return this.#id};
 
     set fineshed(value){
