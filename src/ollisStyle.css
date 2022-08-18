@@ -4,7 +4,7 @@ body{
     color:gray;
 }
 
-.show-message{
+.show-todo-box{
     min-width: 80%;
     position: relative;
     font-size: 0.8em;
@@ -13,14 +13,19 @@ body{
     border-radius: 0.4em;
     background-color: rgb(253, 255, 253);
     border: 1px solid darkgray;
-    /* visibility: hidden; */
     box-shadow: 2px 4px 6px rgba(84, 87, 84, 0.1);;
   }
 
-  .show-message li{
-    list-style: none;
-    padding-bottom: 0.5em;;
+  .todo-header{
+    font-size: medium;
+    min-width: 100%;
+    text-align: center;
+    margin-left: -0.5em;
+    margin-top: -0.05em;
+    padding: 0.2em 0;
+    flex-basis: 100%;
   }
+  
    
   .symbol-btn{ 
     border-radius: 50%;
@@ -28,27 +33,70 @@ body{
     border: 2px solid rgb(178, 177, 177);
     background-color: inherit;
     color: rgb(178, 177, 177);
-    width: 1.4em;
-    height: 1.4em; 
+    max-width: 1.4em;
+    max-height: 1.4em; 
   }
-
-  .symbol-btn:hover{
-      background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  
 
   .green{
     border: 2px solid rgb(76, 138, 87); 
     color: rgb(76, 138, 87);
+    transition: all 0.5s;
+  }
+
+  .comment{
+    margin-top: 2%;
+    min-width: 100%;
+    margin-right: 0.5em;
+  }
+
+  .green:hover{
+    background-color: rgba(76, 138, 87, 0.452);
+    transform: rotate(360deg);
+    cursor: pointer;
   }
 
   .red{
     border: 2px solid rgb(189, 97, 97); 
     color: rgb(189, 97, 97);
+    transition: all 0.8s;
+    
+  }
+
+  .red:hover{
+    background-color: rgba(189, 97, 97, 0.517);
+    transform: rotateY(540deg) scale(1.5, 1.5);
+    cursor: pointer;
   }
 
   .blue{
     border: 2px solid rgb(111, 112, 188); 
     color: rgb(111, 112, 188); 
+    transition: all 0.5s;
+  }
+
+  .blue:hover{
+    background-color: rgba(111, 112, 188, 0.567);
+    transform: rotate(405deg);
+    cursor: pointer;
+  }
+
+  
+  .flex-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flex-row{
+    display: flex;
+    min-width: 95%;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 0.5em;
+  }
+  
+  /* Test */
+
+  .brd{
+    border: 1px solid gray;
   }

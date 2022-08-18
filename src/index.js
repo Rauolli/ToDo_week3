@@ -1,5 +1,4 @@
-// import { TodoDate, ToDoTime, ToDo, TodoApp } from "./todo_classes";
-// ------- Input-Felder lesen -------------------
+// 
 
 class TodoApp{
     //// todo; todo-list, active-todo-list and finished-todo-list
@@ -20,10 +19,10 @@ class TodoApp{
 
     constructor(){
         this.#todoList = new TodoList();
-        this.#inputDate = document.document.getElementById('todo-date');
-        this.#inputTime = document.document.getElementById('todo-time');
-        this.#inputTask = document.document.getElementById('todo-task');
-        this.#inputComment = document.document.getElementById('todo-comment');
+        this.#inputDate = document.getElementById('todo-date');
+        this.#inputTime = document.getElementById('todo-time');
+        this.#inputTask = document.getElementById('todo-task');
+        this.#inputComment = document.getElementById('todo-comment');
     }
 
     get todoList(){ return this.#todoList};
@@ -37,22 +36,6 @@ class TodoApp{
         localStorage.data = JSON.stringify(this.#todoList);
     }
 
-    deleteInputBox(){
-
-    }
-    
-    showActiveList(){
-        this.#activeTodoList.forEach(item =>{
-            // showDate = document.getElementById('show-date');
-            // showTime = document.getElementById('show-time');
-            // showTask = document.getElementById('show-task');
-
-            showTask.innerHTML = `${this.#activeTodoList}`;
-            showDate.innerHTML = `${dateStr.toString()}`;
-            showTime.innerHTML = `${timeStr.toString()}`;
-        })
-    }
-
     showFinishedList(){
 
     }
@@ -60,78 +43,38 @@ class TodoApp{
 
 // ======================================================================================
 
-const date = document.getElementById('todo-date').value;
-const time = document.getElementById('todo-time').value;
-const task = document.getElementById('todo-task').value;
+const todoApp = new TodoApp();
+// Buttons für Erstellen eines Todo's Variablen zuweisen und Event-Listener registrieren
+const buttonAdd = document.getElementById('btn-todo-add');
+buttonAdd.addEventListener("click", createObject);
 
+// Input-Felder Variblen zuweisen
+let task = document.getElementById('todo-task');
+let date = document.getElementById('todo-date');
+let time = document.getElementById('todo-time');
+let comment = document.getElementById('todo-comment');
 
+const buttonDelete = document.getElementById('btn-todo-delete');
+buttonDelete.addEventListener("click", deleteInputBox);
 
-
-const showBox = document.querySelector('.show-message');
-const btnCreateTask = document.getElementById('btn_date_time');
-const btnClose = document.querySelector('#btn-close');
-const btnDelete = document.querySelector('#btn-delete');
-const btnAdd = document.querySelector('#btn-add');
-
-
-btnClose.addEventListener('click', (event)=> showBox.style.visibility = 'hidden');
-
-let showDate = document.getElementById('show-date');
-let showTime = document.getElementById('show-time');
-let showTask = document.getElementById('show-task');
-
-const todoList = new TodoList();
 
 // ********* Funktionen zur DOM-Manipulation *************
-// Aufgabenfeld befüllen
-const fillToDoField = ()=>{
-    showDate = document.getElementById('show-date');
-    showTime = document.getElementById('show-time');
-    showTask = document.getElementById('show-task');
 
-    showTask.innerHTML = `${task}`;
-    showDate.innerHTML = `${date}`;
-    showTime.innerHTML = `${time}`;
-    showBox.style.visibility = 'visible';
-};
 
 // Erstellen eines Objekts und einer todo-List
-const createObject = ()=>{
-    const toDo = new ToDo(date, time, task, document.querySelector('#todo-comment').value);
+function createObject(){
+    const toDo = new ToDo(date.value, time.value, task.value, comment.value);
     console.log(toDo);
-    todoList.add(toDo);
-    console.log(todoList);
-
-    return toDo;
+    todoApp.todoList.add(toDo);
+    console.log(todoApp.todoList);
 }
 
 
-const deleteToDoField = () =>{
-    const showDate = document.getElementById('show-date');
-    const showTime = document.getElementById('show-time');
-    const showTask = document.getElementById('show-task');
-    showTask.innerHTML = '';
-    showDate.innerHTML = '';
-    showTime.innerHTML = '';
-    document.querySelector('#todo-comment').value = '';
+function deleteInputBox(){
+    task.value = '';   
+    date.value = '';   
+    time.value = '';   
+    comment.value = '';
 }
 
-btnCreateTask.addEventListener('click', fillToDoField);
-btnAdd.addEventListener('click', createObject);
-btnDelete.addEventListener('click', deleteToDoField);
-      // Aufgabenfeld anzeigen
-      const showToDoField = ()=>{};
-      // Aufgabenfeld schließen
-      const closeToDoField = ()=>{};
-      // alle activen Aufgaben anzeigen
-      const showActiveToDoes = ()=>{};
-      // alle erledigte Aufgaben anzeigen
-      const showDoneToDoes = ()=>{};
 
-
-
-
-//
-
-
-console.log(todoList);
