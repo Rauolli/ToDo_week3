@@ -22,50 +22,56 @@
     <main>
       <section class="erledigte-Aufgaben">
         <div class="section-header">
-          <h2>erledigte Aufgaben</h2>
+          <h2>Erledigte Aufgaben</h2>
         </div>
-        <div class="Aufgaben-Karte">
-          <p>AufgabenName</p>
-          <span class="material-symbols-outlined"> add </span>
-          <span class="material-symbols-outlined"> delete </span>
-        </div>
+        <!-- Template für Erledigte Aufgaben -->
+        <template id="finished-todo-template">
+          <article class="show-todo-box flex-col ">       
+              <h3 id="todo-fin-task" class="todo-header">Aufgabe</h3>          
+            <div class="flex-row">
+              <div id="todo-fin-date">Datum</div>
+              <div id="todo.fin-time">Zeit</div>
+              <div class="right">
+                <button class="material-symbols-outlined green"> done </button>
+                <button class=" material-symbols-outlined red"> delete </button>
+              </div>
+            </div>
+            <section class="comment">
+            <div id="todo-fin-comment">Komentar</div>
+            </section>        
+          </article>
+        </template>
+        <div id="finished-todo"></div>
+        <!-- Template für Erledigte Aufgaben -->
       </section>
       <section class="erstellung-Aufgaben">
         <div class="section-header">
-          <h2>erstelle deine Aufgabe</h2>
+          <h2>Erstelle deine Aufgabe</h2>
         </div>
-        <div class="Aufgaben-Karte_Erstellung">
-          <!-- <span class="material-symbols-outlined"> add </span> -->
-          <!-- <form action="#">
-            <input type="text" name="task" id="task" />
-          </form> -->
+        <div class="show-todo-box">        
         <!--###### Eingabebereich für ToDo ###########-->
-        <div class="date-time">
-          <label for="todo-date">Datum:</label>
-          <input type="date" id="todo-date">
-          <label for="todo-time">Zeit:</label>
-          <input type="time" id="todo-time">
-          <label for="todo-task">Aufgabe:</label>
-          <input type="text" id="todo-task" placeholder="To-Do">
-          <button id="btn_date_time" class="symbol-btn material-symbols-outlined">add</button>
-        </div> 
-      </div>
-      <!--***** Ausgabe und Bestätigung für die ToDo ****-->
-      <div class="show-message">
-        <button class="symbol-btn material-symbols-outlined" id="btn-close">close</button>
-        <table>
-          <tr><td>Aufgabe:</td><td id="show-task"></td></tr>
-          <tr><td>Datum:</td><td id="show-date"></td></tr>
-          <tr><td>Zeit:</td><td id="show-time"></td></tr>
+        <!-- <button class="symbol-btn material-symbols-outlined" id="btn-close">close</button> -->
+        <table>        
+          <tr>
+            <td><label for="todo-task">Aufgabe:</label></td>
+            <td><input type="text" id="todo-task" placeholder="To-Do"></td>
+          </tr>         
+          <tr>
+            <td><label for="todo-date">Datum:</label></td>
+            <td><input type="date" id="todo-date"></td>
+          </tr>
+          <tr>
+            <td><label for="todo-time">Zeit:</label></td>
+            <td><input type="time" id="todo-time"></td>
+          </tr>
           <tr>
           <td><label for="todo-comment">Kommentar:</label></td>
           <td><textarea name="todo-comment" id="todo-comment" cols="30" rows="5"></textarea></td> 
           </tr>      
         <tr>
           <td>
-            <button id="btn-add" class="symbol-btn material-symbols-outlined blue"> add </button>        
-          <!-- <button class="symbol-btn material-symbols-outlined green"> done </button> -->
-            <button  id="btn-delete" class="symbol-btn material-symbols-outlined red"> delete </button>
+            <button id="btn-todo-add" class="symbol-btn material-symbols-outlined blue"> add </button>        
+            <button  id="btn-todo-delete" class="symbol-btn material-symbols-outlined red"> delete </button>
           </td>
         </tr>
       </table>
@@ -73,17 +79,28 @@
       </section>
       <section class="aktive-Aufgaben">
         <div class="section-header">
-          <h2>aktive Aufgaben</h2>
+          <h2>Aktive Aufgaben</h2>
         </div>
-        <div class="Aufgaben-Karte">
-          <p>AufgabenName</p>
-          <span class="material-symbols-outlined"> done </span>
-          <span class="material-symbols-outlined"> add </span>
-          <span class="material-symbols-outlined"> delete </span>
-        </div>
-      </section>
+        <!-- Template für aktive Aufgaben -->
+        <template id="active-todo-template">
+          <article class="show-todo-box flex-col ">       
+              <h3 id="todo-active-task" class="todo-header">Aufgabe</h3>          
+            <div class="flex-row">
+              <div id="todo-active-date">Datum</div>
+              <div id="todo-active-time">Zeit</div>
+              <div class="right">
+                <button class="material-symbols-outlined green"> done </button>
+                <button class=" material-symbols-outlined red"> delete </button>
+              </div>
+            </div>
+            <section class="comment">
+            <div id="todo-active-comment">Komentar</div>
+            </section>        
+          </article>
+        </template>
+        <div id="active-todo"></div>
+        <!-- Template für aktive Aufgaben -->
     </main>
-    <!-- <script src="./src/todo_classes.js"></script> -->
     <script src="./src/todoDateTime_class.js"></script>
     <script src="./src/todo_class.js"></script>
     <script src="./src/todo_Lists_class.js"></script>

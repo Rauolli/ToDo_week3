@@ -7,7 +7,7 @@ class ToDo{
     #dateStr;
     #task;
     #comment = '';
-    #finished = false;
+    #isDone;
 
     constructor(todoDate, todoTime, task, comment ){
         this.#dateTime = new TodoDateTime(todoDate, todoTime); 
@@ -15,30 +15,26 @@ class ToDo{
         this.#dateStr = this.#dateTime.asGermDateStr; 
         this.#task = task;
         this.#comment = comment;
+        this.#isDone = false;
         this.setId();
         // making a datype Date() to compare with the actual date    
         this.#originDateTime = new Date(parseInt(this.#dateTime.year), parseInt(this.#dateTime.month)-1, parseInt(this.#dateTime.day), parseInt(this.#dateTime.hour), parseInt(this.#dateTime.minute));
     }
 
     
-    get dateTime(){ return this.#originDateTime};
-    get task(){ return this.#task};
-    get comment(){ return this.#comment};
-    get fineshed(){ return this.#finished};
-    get minute(){ return this.#dateTime.minute};
-    get hour(){ return this.#dateTime.hour};
-    get day(){ return this.#dateTime.day};
-    get month(){ return this.#dateTime.month};
-    get year(){ return this.#dateTime.year};
     get id(){ return this.#id};
 
-    set fineshed(value){
-        if(typeof value === 'boolean'){ 
-            this.#finished = value;
-        }
-        else{
-            this.#finished = !this.#finished;
-        }
+    get task(){ return this.#task};
+    get comment(){ return this.#comment};
+    get isDone(){ return this.#isDone};
+
+    get dateTime(){ return this.#originDateTime};
+    get dateStr(){ return this.#dateStr};
+    get timeStr(){ return this.#timeStr};
+
+
+    setDoneUndone(){
+        this.#isDone = !this.#isDone;   
     } 
     
     setId(){
@@ -52,10 +48,3 @@ class ToDo{
     }
 
 }   
-
-
-// Test Test Test
-
-// const myTodo = new ToDo(new TodoDate("2022-03-12").asGermStr, new TodoTime("12:15").asStr, "Schöner Tag", "Test test Test.");
-
-// console.log(`Aufgabe: ${myTodo.task}\nDatum: ${myTodo.date}\nZeit: ${myTodo.time}\nKommentar: ${myTodo.comment}\nId: ${myTodo.id}`);
