@@ -17,13 +17,15 @@ buttonDelete.addEventListener("click", deleteInputBox);
 
 const finished = document.getElementById('finished-todo');
 const active = document.getElementById('active-todo');
+// Test-Todo's
+
 const todos =
     [
         [       
-        "2022-12-24",
-        "15:00",
-        "Weihnachten",
-        "Heiligabend wird bestimmt schön"
+            "2022-12-24",
+            "15:00",
+            "Weihnachten",
+            "Heiligabend wird bestimmt schön"
         ],
         [
             "2022-12-25",
@@ -33,43 +35,77 @@ const todos =
         ],
         [
             "2022-12-26",
-            "Erster WeihnachtsFeiertag, Mittagessen bei Schwiegereltern",
+            "12:30",
             "Weihnachten",
-        "Zweiter WeihnachtsFeiertag, Mittagessen bei meinen Eltern"
+            "Zweiter WeihnachtsFeiertag, Mittagessen bei meinen Eltern"
         ]
     ]
-todos.forEach((todo) => {
-    const todoObj = new ToDo(todo[0], todo[1], todo[2], todo[3]);
-    console.log(todoObj.id, todoObj.task, todoObj.dateStr, todoObj.timeStr, todoObj.comment);
-    toDoList.add(todoObj);
-    if(todoObj.isDone){
-        toDoFinishedList.add(todoObj);
-                
-        const tmplFin = document.getElementById('finished-todo-template').contentEditable.cloneNode(true);
-        tmplFin.querySelector('#todo-fin-task').innerText = todoObj.task;
-        tmplFin.querySelector('#todo-fin-date').innerText = todoObj.dateStr;
-        tmplFin.querySelector('#todo-fin-time').innerText = todoObj.timeStr;
-        tmplFin.querySelector('#todo-fin-comment').innerText = todoObj.comment;
-        finished.appendChild(tmplFin);
-    }else{
-        toDoActiveList.add(todo);
 
-        const tmplActive = document.getElementById('active-todo-template').content.cloneNode(true);
-        tmplActive.querySelector('#todo-active-task').innerText = todoObj.task;
-        tmplActive.querySelector('#todo-active-date').innerText = todoObj.dateStr;
-        tmplActive.querySelector('#todo-active-time').innerText = todoObj.timeStr;
-        tmplActive.querySelector('#todo-active-comment').innerText = todoObj.comment;
-        active.appendChild(tmplActive);
-        }
+ const osterSo = new ToDo("2022-04-17", "13:00", "Ostersonntag", "Essen bei Freunden"); 
+ const osterSa = new ToDo("2022-04-16", "22:00", "Ostersamstag", "Big Party am See"); 
+ 
+ osterSo.setDoneUndone();
+ osterSa.setDoneUndone();
+
+ toDoList.add(osterSa);
+ toDoList.add(osterSo);
+
+
+todos.forEach((todo) => {
+    
+    const todoObj = new ToDo(...todo);
+    
+    toDoList.add(todoObj)
 });
     
 // ********* Funktionen zur DOM-Manipulation *************
 
+function showLists(){   
+    refresh(); 
+    toDoList.getList().sort((a, b) => b.date - a.date);  
+    toDoList.getList().forEach( todoObj => {
+        if(todoObj.isDone){
+            toDoFinishedList.add(todoObj);
+                    
+            const tmplFin = document.getElementById('finished-todo-template').content.cloneNode(true);
+            tmplFin.querySelector('#todo-fin-task').innerText = todoObj.task;
+            tmplFin.querySelector('#todo-fin-date').innerText = todoObj.dateStr;
+            tmplFin.querySelector('#todo-fin-time').innerText = todoObj.timeStr;
+            tmplFin.querySelector('#todo-fin-comment').innerText = todoObj.comment;
+            finished.appendChild(tmplFin);
+        }else{
+            toDoActiveList.add(todoObj);
+    
+            const tmplActive = document.getElementById('active-todo-template').content.cloneNode(true);
+            tmplActive.querySelector('#todo-active-task').innerText = todoObj.task;
+            tmplActive.querySelector('#todo-active-date').innerText = todoObj.dateStr;
+            tmplActive.querySelector('#todo-active-time').innerText = todoObj.timeStr;
+            tmplActive.querySelector('#todo-active-comment').innerText = todoObj.comment;
+            active.appendChild(tmplActive);
+            }
+    });
+}
 
 // Erstellen eines Objekts und einer todo-List
 function createObject(){
-    const toDo = new ToDo(date.value, time.value, task.value, comment.value);
-    toDoList.add(toDo);
+    if(date.value === "" || time.value === "" || task.value === ""){
+        showLists();
+        return   
+    }else{
+        const toDo = new ToDo(date.value, time.value, task.value, comment.value);
+        toDoList.add(toDo);
+        //console.log(toDoList.allToString());
+        showLists();
+    }
+}
+
+function refresh(){
+    const activeTodo = document.getElementById('active-todo');
+    const boxesAct = activeTodo.querySelectorAll('.show-todo-box');
+    boxesAct.forEach(box => box.remove());
+    const fineshedTodo = document.getElementById('fineshed-todo');
+    const boxesFin = activeTodo.querySelectorAll('.show-todo-box');
+    boxesFin.forEach(box => box.remove());
 }
 
 
