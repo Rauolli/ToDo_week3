@@ -57,6 +57,7 @@ todos.forEach((todo) => {
     
     toDoList.add(todoObj)
 });
+
 toDoList.getList().forEach(todo => todo.isDone? toDoFinishedList.add(todo): '');
 showLists();
     
@@ -105,11 +106,10 @@ function refresh(){
     const activeTodo = document.getElementById('active-todo');
     const boxesAct = activeTodo.querySelectorAll('.show-todo-box');
     boxesAct.forEach(box => box.remove());
-    const fineshedTodo = document.getElementById('fineshed-todo');
-    if(fineshedTodo !== null){
-        const boxesFin = fineshedTodo.querySelectorAll('.show-todo-box');
-        boxesFin.forEach(box => box.remove());
-    }
+    const finishedTodo = document.getElementById('finished-todo');
+    const boxesFin = finishedTodo.querySelectorAll('.show-todo-box');
+    boxesFin.forEach(box => box.remove());
+    
 }
 
 
