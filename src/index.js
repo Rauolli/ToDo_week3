@@ -57,6 +57,9 @@ todos.forEach((todo) => {
     
     toDoList.add(todoObj)
 });
+
+toDoList.getList().forEach(todo => todo.isDone? toDoFinishedList.add(todo): '');
+showLists();
     
 // ********* Funktionen zur DOM-Manipulation *************
 
@@ -103,9 +106,10 @@ function refresh(){
     const activeTodo = document.getElementById('active-todo');
     const boxesAct = activeTodo.querySelectorAll('.show-todo-box');
     boxesAct.forEach(box => box.remove());
-    const fineshedTodo = document.getElementById('fineshed-todo');
-    const boxesFin = activeTodo.querySelectorAll('.show-todo-box');
+    const finishedTodo = document.getElementById('finished-todo');
+    const boxesFin = finishedTodo.querySelectorAll('.show-todo-box');
     boxesFin.forEach(box => box.remove());
+    
 }
 
 
