@@ -10,7 +10,7 @@ class TodoList{
     }
 
     add(todo){
-        if (this.#todoList.includes(todo.id)) {
+        if ((this.#todoList.includes(todo.id))|| (this.#todoList.includes(todo.task) && this.#todoList.includes(todo.date) && this.#todoList.includes(todo.time))) {
             return;    
         }else if(todo.isDone){
             this.#todoList.push(todo);
@@ -18,6 +18,8 @@ class TodoList{
             this.#todoList.push(todo);    
         }     
     }
+
+    getList(){ return this.#todoList;}
 
     delete(todo){
         this.#todoList = this.#todoList.filter(item => item.id !== todo.id);
@@ -31,7 +33,6 @@ class TodoList{
             return item;
         });
     }
-
 
     checkIfTodoIsInFuture(todo){       
         if (todo.dateTime < this.#today) {
