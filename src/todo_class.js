@@ -48,10 +48,3 @@ class ToDo{
     }
 
 }   
-
-
-// Test Test Test
-
-// const myTodo = new ToDo(new TodoDate("2022-03-12").asGermStr, new TodoTime("12:15").asStr, "Schöner Tag", "Test test Test.");
-
-// console.log(`Aufgabe: ${myTodo.task}\nDatum: ${myTodo.date}\nZeit: ${myTodo.time}\nKommentar: ${myTodo.comment}\nId: ${myTodo.id}`);

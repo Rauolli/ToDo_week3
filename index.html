@@ -25,22 +25,23 @@
           <h2>Erledigte Aufgaben</h2>
         </div>
         <!-- Template für Erledigte Aufgaben -->
-        <!-- <template> -->
+        <template id="finished-todo-template">
           <article class="show-todo-box flex-col ">       
-              <h3 class="todo-header ">Aufgabe</h3>          
-            <div class="flex-row ">
-              <div >Datum</div>
-              <div >Zeit</div>
-              <div class="right ">
-                <span class="material-symbols-outlined green"> done </span>
-                <span class=" material-symbols-outlined red"> delete </span>
+              <h3 id="todo-fin-task" class="todo-header">Aufgabe</h3>          
+            <div class="flex-row">
+              <div id="todo-fin-date">Datum</div>
+              <div id="todo.fin-time">Zeit</div>
+              <div class="right">
+                <button class="material-symbols-outlined green"> done </button>
+                <button class=" material-symbols-outlined red"> delete </button>
               </div>
             </div>
             <section class="comment">
-            <div class="">Komentar</div>
+            <div id="todo-fin-comment">Komentar</div>
             </section>        
           </article>
-        <!-- </template> -->
+        </template>
+        <div id="finished-todo"></div>
         <!-- Template für Erledigte Aufgaben -->
       </section>
       <section class="erstellung-Aufgaben">
@@ -81,22 +82,23 @@
           <h2>Aktive Aufgaben</h2>
         </div>
         <!-- Template für aktive Aufgaben -->
-        <!-- <template> -->
+        <template id="active-todo-template">
           <article class="show-todo-box flex-col ">       
-              <h3 class="todo-header ">Aufgabe</h3>          
-            <div class="flex-row ">
-              <div >Datum</div>
-              <div >Zeit</div>
-              <div class="right ">
+              <h3 id="todo-active-task" class="todo-header">Aufgabe</h3>          
+            <div class="flex-row">
+              <div id="todo-active-date">Datum</div>
+              <div id="todo-active-time">Zeit</div>
+              <div class="right">
                 <button class="material-symbols-outlined green"> done </button>
                 <button class=" material-symbols-outlined red"> delete </button>
               </div>
             </div>
             <section class="comment">
-            <div class="">Komentar</div>
+            <div id="todo-active-comment">Komentar</div>
             </section>        
           </article>
-        <!-- </template> -->
+        </template>
+        <div id="active-todo"></div>
         <!-- Template für aktive Aufgaben -->
     </main>
     <script src="./src/todoDateTime_class.js"></script>
