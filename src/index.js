@@ -75,6 +75,10 @@ function showLists(){
             tmplFin.querySelector('#todo-fin-date').innerText = todoObj.dateStr;
             tmplFin.querySelector('#todo-fin-time').innerText = todoObj.timeStr;
             tmplFin.querySelector('#todo-fin-comment').innerText = todoObj.comment;
+            tmplFin.querySelector('.checkbox-fin').setAttribute('id', `cb-fin-${todoObj.id}`);
+            tmplFin.getElementById(`cb-fin-${todoObj.id}`).addEventListener('change', pushToOtherList);
+            tmplFin.querySelector('.delete-fin').setAttribute('id', `delete-fin-${todoObj.id}`);
+            tmplFin.getElementById(`delete-fin-${todoObj.id}`).addEventListener('click', orderLists);
             finished.appendChild(tmplFin);
         }else{
             toDoActiveList.add(todoObj);
@@ -84,6 +88,10 @@ function showLists(){
             tmplActive.querySelector('#todo-active-date').innerText = todoObj.dateStr;
             tmplActive.querySelector('#todo-active-time').innerText = todoObj.timeStr;
             tmplActive.querySelector('#todo-active-comment').innerText = todoObj.comment;
+            tmplActive.querySelector('.checkbox-act').setAttribute('id', `cb-act-${todoObj.id}`);
+            tmplActive.getElementById(`cb-act-${todoObj.id}`).addEventListener('change', pushToOtherList);
+            tmplActive.querySelector('.delete-act').setAttribute('id', `delete-act-${todoObj.id}`);
+            tmplActive.getElementById(`delete-act-${todoObj.id}`).addEventListener('click', orderLists);
             active.appendChild(tmplActive);
             }
     });
@@ -119,6 +127,16 @@ function deleteInputBox(){
     date.value = '';   
     time.value = '';   
     comment.value = '';
+}
+
+function pushToOtherList(e){
+    // TODO
+    console.log(`Event-Target: ${e.target}`);
+}
+
+function orderLists(e){
+    // TODO
+    console.log(`Event-Target: ${e.target}`);
 }
 
 

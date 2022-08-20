@@ -10,7 +10,9 @@ class TodoList{
     }
 
     add(todo){
-        if ((this.#todoList.includes(todo.id))|| (this.#todoList.includes(todo.task) && this.#todoList.includes(todo.date) && this.#todoList.includes(todo.time))) {
+        const tdList = this.#todoList;
+        // TODO
+        if ((todo.id === tdList.includes.id)|| (todo.task === tdList.includes.task && todo.dateStr === tdList.includes.timeStr)) {
             return;    
         }else if(todo.isDone){
             this.#todoList.push(todo);
