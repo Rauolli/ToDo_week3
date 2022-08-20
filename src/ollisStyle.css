@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(234, 248, 234);
+    background-color: rgb(224, 252, 207);
     font-family: Arial, Helvetica, sans-serif;
     color:gray;
 }
@@ -11,9 +11,9 @@ body{
     margin: 0.8em;
     padding: 0 0 0.5em 0.5em;
     border-radius: 0.4em;
-    background-color: rgb(253, 255, 253);
+    background-color: rgba(240, 253, 240, 0.892);
     border: 1px solid darkgray;
-    box-shadow: 2px 4px 6px rgba(84, 87, 84, 0.1);;
+    box-shadow: 2px 4px 6px rgba(82, 103, 82, 0.586);;
   }
 
   .todo-header{
@@ -96,6 +96,15 @@ body{
   }
   
   /* Test */
+  [type="checkbox"]{
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
 
   .brd{
     border: 1px solid gray;

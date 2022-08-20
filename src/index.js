@@ -62,7 +62,7 @@ toDoList.getList().forEach(todo => todo.isDone? toDoFinishedList.add(todo): '');
 showLists();
     
 // ********* Funktionen zur DOM-Manipulation *************
-
+// Todo-Listen Anzeigen
 function showLists(){   
     refresh(); 
     toDoList.getList().sort((a, b) => b.date - a.date);  
@@ -102,6 +102,7 @@ function createObject(){
     }
 }
 
+// Löschen der Todo-Boxen
 function refresh(){
     const activeTodo = document.getElementById('active-todo');
     const boxesAct = activeTodo.querySelectorAll('.show-todo-box');
@@ -112,7 +113,7 @@ function refresh(){
     
 }
 
-
+// Felder der Input-Box löschen 
 function deleteInputBox(){
     task.value = '';   
     date.value = '';   
