@@ -12,8 +12,10 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 58%;
 }
+
+
 
 header {
   font-size: 4rem;
@@ -55,4 +57,51 @@ main {
   justify-content: center;
 }
 
+@media screen and (max-width: 730px){
+  main{
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
 
+  header{
+    font-size: 2rem;
+    min-height: auto;
+    text-align: center;  
+  }
+
+  .erledigte-Aufgaben {
+    order: 2;
+    font-size: 1rem;
+    max-height: 30%;
+  }
+  
+  .erstellung-Aufgaben {
+    font-size: 1.1rem;
+    max-height: 30%;
+  }
+  
+  .aktive-Aufgaben {
+    font-size: 1rem;
+    max-height: 30%;
+  }
+
+  .show-todo-box{
+    min-width: 80%;
+    font-size: 0.8em;
+    margin: 0.4em;
+    padding: 0 0 0.5em 0.5em;
+    border-radius: 0.4em;
+    background-color: rgba(249, 252, 248, 0.9);
+    border: 1px solid darkgray;
+    box-shadow: 2px 4px 6px rgba(82, 103, 82, 0.586);;
+  }
+  .show-todo-box div{
+    font-size: 1.5em;
+  }
+
+  #todo-active-comment,
+  #todo-fin-comment{
+    font-size: 2.2em;
+  }
+}
