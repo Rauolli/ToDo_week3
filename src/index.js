@@ -1,5 +1,5 @@
 // Liste als Map() [JS] zum Zwischenspeichern der todo's
-const todoList = new Map();
+let todoList = new Map();
 // localStorage-Daten
 
 
@@ -176,17 +176,19 @@ window.onload = () => {
 
 // Laden und Speichern vom LocalStorage ++++++++++++++++++++++++++++++++++++++
 function loadFromDataStorage(){
-    // TODO muss geändert werden
-    // if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
-    //     let todoArr = [];
-    //     for (let i = 0; i < localStorage.length; i++) {   
-    //         todoArr.push(localStorage.getItem(i));              
-    //     }
-    //     todoArr = todoArr.map(items => items.split(', '));
-    //     console.log(todoArr);
     
-    //     todoArr.forEach(item => todoList.set(todoArr[0], new ToDo(todoArr[0], todoArr[1], todoArr[2], todoArr[3], todoArr[4], todoArr[5])));
-    // }
+    if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
+        let todoArr = [];
+        for (let i = 0; i < localStorage.length; i++) {   
+            todoArr.push(localStorage.getItem(i));              
+        }
+        // todoArr = todoArr.map(items => items.split(', '));
+        //console.log(todoArr);
+        
+        console.log(todoArr);
+        // TODO muss geändert werden
+        //todoList.set( todoObjArr[0], todoObjArr[0]);
+    }
 }
 
 function saveToDataStorage(){
