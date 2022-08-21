@@ -3,7 +3,8 @@ class TodoDateTime{
     #year;
     #month;
     #day;
-    #originStr;
+    #originDateStr;
+    #originTimeStr;
     #asGermDateStr;
 
     #hour;
@@ -11,24 +12,27 @@ class TodoDateTime{
     #asTimeStr;
 
     constructor(dateStr, timeStr){
-        this.#originStr = dateStr;
-        const dateStrArr = dateStr.split('-');
+        this.#originDateStr = dateStr;       
+        const dateStrArr = dateStr.toString().split('-');
         this.#year = dateStrArr[0];
         this.#month = dateStrArr[1];
         this.#day = dateStrArr[2];
         this.#asGermDateStr = `${this.#day}.${this.#month}.${this.#year}`;
-
-        const timeStrArr = timeStr.split(':');
+        
+        this.#originTimeStr = timeStr;
+        const timeStrArr = timeStr.toString().split(':');
         this.#hour = timeStrArr[0];
         this.#minute = timeStrArr[1];
         this.#asTimeStr = `${this.#hour}:${this.#minute}`;
+
     }
 
     get year(){ return this.#year};
     get month(){ return this.#month};
     get day(){ return this.#day};
     get asGermDateStr(){ return this.#asGermDateStr};
-    get originStr(){ return this.#originStr};
+    get originDateStr(){ return this.#originDateStr};
+    get originTimeStr(){ return this.#originTimeStr};
 
     get hour(){ return this.#hour};
     get minute(){ return this.#minute};
