@@ -3,20 +3,26 @@ class ToDo{
     #id = '';
     #dateTime;
     #originDateTime;
+    #originDateStr;
+    #originTimeStr;
     #timeStr;
     #dateStr;
     #task;
     #comment = '';
     #isDone;
 
-    constructor(todoDate, todoTime, task, comment ){
+    constructor(id='', todoDate, todoTime, task, comment, done = false){
+        this.#originDateStr = todoDate;
+        this.#originTimeStr = todoTime;
         this.#dateTime = new TodoDateTime(todoDate, todoTime); 
         this.#timeStr = this.#dateTime.asTimeStr; 
         this.#dateStr = this.#dateTime.asGermDateStr; 
         this.#task = task;
         this.#comment = comment;
-        this.#isDone = false;
-        this.setId();
+        this.#isDone = done;
+        if(id === ''){
+            this.setId();
+        }
         // making a datype Date() to compare with the actual date    
         this.#originDateTime = new Date(parseInt(this.#dateTime.year), parseInt(this.#dateTime.month)-1, parseInt(this.#dateTime.day), parseInt(this.#dateTime.hour), parseInt(this.#dateTime.minute));
     }
@@ -30,8 +36,9 @@ class ToDo{
 
     get dateTime(){ return this.#originDateTime};
     get dateStr(){ return this.#dateStr};
+    get originDateStr(){ return this.#originDateStr};
     get timeStr(){ return this.#timeStr};
-
+    get originTimeStr(){ return this.#originTimeStr};
 
     setDoneUndone(){
         this.#isDone = !this.#isDone;   
@@ -45,6 +52,10 @@ class ToDo{
             rnd = Math.floor(Math.random() * 16);
             this.#id += hexArr[rnd];
         }
+    }
+
+    toString(){
+        return `${this.#id}, ${this.#originDateStr}, ${this.#originTimeStr}, ${this.#task}, ${this.#comment}, ${this.#isDone}`;
     }
 
 }   
