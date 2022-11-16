@@ -1,3 +1,4 @@
+import TodoDateTime from "./todoDateTime_class.js";
 // -------------- ToDo-Class for ToDo-Objects --------------------------
 class ToDo{
     #id = '';
@@ -22,6 +23,9 @@ class ToDo{
         this.#isDone = done;
         if(id === ''){
             this.setId();
+        }
+        else{
+            this.#id = id;
         }
         // making a datype Date() to compare with the actual date    
         this.#originDateTime = new Date(parseInt(this.#dateTime.year), parseInt(this.#dateTime.month)-1, parseInt(this.#dateTime.day), parseInt(this.#dateTime.hour), parseInt(this.#dateTime.minute));
@@ -55,7 +59,9 @@ class ToDo{
     }
 
     toString(){
-        return JSON.stringify({id: this.#id, dateStr: this.#dateStr, timeStr: this.#originTimeStr,task: this.#task, comment: this.#comment, isDone: this.#isDone});
+        return JSON.stringify({id: this.#id, dateStr: this.#originDateStr, timeStr: this.#originTimeStr,task: this.#task, comment: this.#comment, isDone: this.#isDone});
     }
 
 }   
+
+export default ToDo;

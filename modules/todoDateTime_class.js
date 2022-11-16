@@ -39,3 +39,5 @@ class TodoDateTime{
     get asTimeStr(){ return this.#asTimeStr};
 
 }
+
+export default TodoDateTime;

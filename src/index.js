@@ -1,3 +1,4 @@
+import ToDo from '../modules/todo_class.js';
 // Liste als Map() [JS] zum Zwischenspeichern der todo's
 let todoList = new Map();
 // localStorage-Daten
@@ -36,30 +37,30 @@ const active = document.getElementById('active-todo');
 //  todoList.set(osterSa.id, osterSa);
 //  todoList.set(osterSo.id, osterSo);
 
- const todos =
- [
-     [ 
-         '',      
-         "2022-12-24",
-         "15:00",
-         "Weihnachten",
-         "Heiligabend wird bestimmt schön"
-     ],
-     [
-        '',
-         "2022-12-25",
-         "18:00",
-         "Weihnachten",
-         "Mittagessen bei Schwiegereltern"
-     ],
-     [
-        '',
-         "2022-12-26",
-         "12:30",
-         "Weihnachten",
-         "Mittagessen bei meinen Eltern"
-     ]
- ]
+//  const todos =
+//  [
+//      [ 
+//          '',      
+//          "2022-12-24",
+//          "15:00",
+//          "Weihnachten",
+//          "Heiligabend wird bestimmt schön"
+//      ],
+//      [
+//         '',
+//          "2022-12-25",
+//          "18:00",
+//          "Weihnachten",
+//          "Mittagessen bei Schwiegereltern"
+//      ],
+//      [
+//         '',
+//          "2022-12-26",
+//          "12:30",
+//          "Weihnachten",
+//          "Mittagessen bei meinen Eltern"
+//      ]
+//  ]
  // für die active Liste
 // todos.forEach((todo) => {
 //     // über Spead-operator alle Eigenschaften zur neuen Todo hinzufügen
@@ -179,9 +180,18 @@ function loadFromDataStorage(){
     
     if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
         for (let i = 0; i < localStorage.length; i++) {   
-            const toDo = JSON.parse(localStorage.getItem(i));                   
-            todoList.set(toDo.id, toDo); 
-            console.log(toDo.id, toDo);             
+            const {
+                id, 
+                dateStr, 
+                timeStr, 
+                task, 
+                comment, 
+                isDone
+            } = JSON.parse(localStorage.getItem(i));
+            console.log("toDo Parsed: ",id, dateStr, timeStr, task, comment, isDone);
+            const newToDoObj = new ToDo(id, dateStr, timeStr, task, comment, isDone); 
+            console.log("newToDoObj: ", newToDoObj);                 
+            todoList.set(newToDoObj.id, newToDoObj);              
         }
         // TODO muss geändert werden
         //todoList.set( todoObjArr[0], todoObjArr[0]);
