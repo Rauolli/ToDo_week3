@@ -153,6 +153,7 @@ function deleteTodoObj(todo){
     console.log(todo);
     if(todoList.has(todo.id) && confirm(`Wollen Sie das Todo: ${todo.task} löschen?`)){
         todoList.delete(todo.id, todo);
+        saveToDataStorage();
     }
         showLists();   
 }
@@ -188,13 +189,9 @@ function loadFromDataStorage(){
                 comment, 
                 isDone
             } = JSON.parse(localStorage.getItem(i));
-            console.log("toDo Parsed: ",id, dateStr, timeStr, task, comment, isDone);
-            const newToDoObj = new ToDo(id, dateStr, timeStr, task, comment, isDone); 
-            console.log("newToDoObj: ", newToDoObj);                 
+            const newToDoObj = new ToDo(id, dateStr, timeStr, task, comment, isDone);                 
             todoList.set(newToDoObj.id, newToDoObj);              
         }
-        // TODO muss geändert werden
-        //todoList.set( todoObjArr[0], todoObjArr[0]);
     }
 }
 
@@ -203,7 +200,6 @@ function saveToDataStorage(){
     if(typeof(Storage)){
         let i = 0;
         todoList.forEach(todoObj => {
-            //console.log(todoObj.toString());
             localStorage.setItem(i, todoObj.toString()); //=> localStorage.setItem(i,  JSON.stringify(todoObj));
             i++;
 
