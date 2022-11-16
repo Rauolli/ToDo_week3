@@ -27,14 +27,14 @@ const active = document.getElementById('active-todo');
 
 // einige Test-Todo's erstellen ***********************************************************************
 
- const osterSo = new ToDo('',"2022-04-17", "13:00", "Ostersonntag", "Essen bei Freunden"); 
- const osterSa = new ToDo('', "2022-04-16", "22:00", "Ostersamstag", "Big Party am See"); 
- // 2 davon auf fertig setzen
- osterSo.setDoneUndone();
- osterSa.setDoneUndone();
-// und der todoFinished hinzufügen
- todoList.set(osterSa.id, osterSa);
- todoList.set(osterSo.id, osterSo);
+//  const osterSo = new ToDo('',"2022-04-17", "13:00", "Ostersonntag", "Essen bei Freunden"); 
+//  const osterSa = new ToDo('', "2022-04-16", "22:00", "Ostersamstag", "Big Party am See"); 
+//  // 2 davon auf fertig setzen
+//  osterSo.setDoneUndone();
+//  osterSa.setDoneUndone();
+// // und der todoFinished hinzufügen
+//  todoList.set(osterSa.id, osterSa);
+//  todoList.set(osterSo.id, osterSo);
 
  const todos =
  [
@@ -61,12 +61,12 @@ const active = document.getElementById('active-todo');
      ]
  ]
  // für die active Liste
-todos.forEach((todo) => {
-    // über Spead-operator alle Eigenschaften zur neuen Todo hinzufügen
-    const todoObj = new ToDo(...todo);
-    // in die activ-Liste
-    todoList.set(todoObj.id, todoObj);
-});
+// todos.forEach((todo) => {
+//     // über Spead-operator alle Eigenschaften zur neuen Todo hinzufügen
+//     const todoObj = new ToDo(...todo);
+//     // in die activ-Liste
+//     todoList.set(todoObj.id, todoObj);
+// });
 
 // *********************************************************************************************
 
@@ -178,27 +178,25 @@ window.onload = () => {
 function loadFromDataStorage(){
     
     if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
-        let todoArr = [];
         for (let i = 0; i < localStorage.length; i++) {   
-            todoArr.push(localStorage.getItem(i));              
+            const toDo = JSON.parse(localStorage.getItem(i));                   
+            todoList.set(toDo.id, toDo); 
+            console.log(toDo.id, toDo);             
         }
-        // todoArr = todoArr.map(items => items.split(', '));
-        //console.log(todoArr);
-        
-        console.log(todoArr);
         // TODO muss geändert werden
         //todoList.set( todoObjArr[0], todoObjArr[0]);
     }
 }
 
 function saveToDataStorage(){
-    localStorage.clear();
+    //localStorage.clear();
     if(typeof(Storage)){
         let i = 0;
         todoList.forEach(todoObj => {
             //console.log(todoObj.toString());
-            localStorage.setItem(i, todoObj.toString() ); // JSON.stringify(todoObj)
+            localStorage.setItem(i, todoObj.toString()); //=> localStorage.setItem(i,  JSON.stringify(todoObj));
             i++;
+
         });
     }
 }

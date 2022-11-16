@@ -55,7 +55,7 @@ class ToDo{
     }
 
     toString(){
-        return `${this.#id}, ${this.#originDateStr}, ${this.#originTimeStr}, ${this.#task}, ${this.#comment}, ${this.#isDone}`;
+        return JSON.stringify({id: this.#id, dateStr: this.#dateStr, timeStr: this.#originTimeStr,task: this.#task, comment: this.#comment, isDone: this.#isDone});
     }
 
 }   
