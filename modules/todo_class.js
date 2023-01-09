@@ -49,7 +49,7 @@ class ToDo{
     } 
     
     setId(){
-        this.#id = crypto.randomUUID();
+        this.#id = `${this.#originDateStr}-${this.#timeStr.replace(':', '-')}`;
     }
 
     toString(){

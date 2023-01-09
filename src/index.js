@@ -1,86 +1,75 @@
 import ToDo from '../modules/todo_class.js';
-// Liste als Map() [JS] zum Zwischenspeichern der todo's
-let todoList = new Map();
-// localStorage-Daten
 
+// Liste für alle zu erstellenden ToDo-Objekte
+const todoList = new Set();
 
-//Button Erstellen eines Todo's und Hinzufügen zur Liste und Event-Listener registrieren
-const buttonAdd = document.getElementById('btn-todo-add');
-buttonAdd.addEventListener("click", createObject);
+document.addEventListener("DOMContentLoaded", () =>{   
+    registerButtons();
+    loadFromDataStorage();
+    showLists();
+});
 
-// Input-Felder Variblen zuweisen
-let task = document.getElementById('todo-task');
-let date = document.getElementById('todo-date');
-let time = document.getElementById('todo-time');
-let comment = document.getElementById('todo-comment');
+// BUTTON-Elemente vom Eingabeformular registrieren
+function registerButtons(){
+    //Button Erstellen eines Todo's und Hinzufügen zur Liste mit Event-Listener
+    const buttonAdd = document.getElementById('btn-todo-add').addEventListener("click", createObject);
+    // Button zum Löschen der Textfelder des Eingabe-Formulars
+    const buttonDelete = document.getElementById('btn-todo-delete').addEventListener("click", deleteInputBox);
+    // Button zum Speichern aller Todo's im localStorage
+    const buttonSaveAll = document.getElementById('btn-todo-save-all').addEventListener("click", saveToDataStorage);
+}
 
-// Button zum Löschen der Textfelder des Eingabe-Formulars
-const buttonDelete = document.getElementById('btn-todo-delete');
-buttonDelete.addEventListener("click", deleteInputBox);
-// Button zum Speichern aller Todo's im localStorage
-const buttonSaveAll = document.getElementById('btn-todo-save-all');
-buttonSaveAll.addEventListener("click", saveToDataStorage);
+// Laden und Speichern vom LocalStorage ++++++++++++++++++++++++++++++++++++++
+function loadFromDataStorage(){   
+    if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
+        for (let i = 0; i < localStorage.length; i++) {   
+            const {
+                id, 
+                dateStr, 
+                timeStr, 
+                task, 
+                comment, 
+                isDone
+            } = JSON.parse(localStorage.getItem(i));
+            const newToDoObj = new ToDo(id, dateStr, timeStr, task, comment, isDone);
+            if(!todoList.has(newToDoObj.id)) todoList.add(newToDoObj);              
+        }
+    }
+}
 
-// die 2 HTML-Template-Elemente jeweils einer Variablen zuweisen
-const finished = document.getElementById('finished-todo');
-const active = document.getElementById('active-todo');
-
-
-// einige Test-Todo's erstellen ***********************************************************************
-
-//  const osterSo = new ToDo('',"2022-04-17", "13:00", "Ostersonntag", "Essen bei Freunden"); 
-//  const osterSa = new ToDo('', "2022-04-16", "22:00", "Ostersamstag", "Big Party am See"); 
-//  // 2 davon auf fertig setzen
-//  osterSo.setDoneUndone();
-//  osterSa.setDoneUndone();
-// // und der todoFinished hinzufügen
-//  todoList.set(osterSa.id, osterSa);
-//  todoList.set(osterSo.id, osterSo);
-
-//  const todos =
-//  [
-//      [ 
-//          '',      
-//          "2022-12-24",
-//          "15:00",
-//          "Weihnachten",
-//          "Heiligabend wird bestimmt schön"
-//      ],
-//      [
-//         '',
-//          "2022-12-25",
-//          "18:00",
-//          "Weihnachten",
-//          "Mittagessen bei Schwiegereltern"
-//      ],
-//      [
-//         '',
-//          "2022-12-26",
-//          "12:30",
-//          "Weihnachten",
-//          "Mittagessen bei meinen Eltern"
-//      ]
-//  ]
- // für die active Liste
-// todos.forEach((todo) => {
-//     // über Spead-operator alle Eigenschaften zur neuen Todo hinzufügen
-//     const todoObj = new ToDo(...todo);
-//     // in die activ-Liste
-//     todoList.set(todoObj.id, todoObj);
-// });
 
 // *********************************************************************************************
 
-// Erstellen eines Objekts und Hinzufügen zur todo-Liste (Map())
+// Erstellen eines Objekts und Hinzufügen zur todo-Liste 
 function createObject(){
-    if(date.value === "" || time.value === "" || task.value === ""){
+    // Input-Felder Variblen zuweisen
+    const task = document.getElementById('todo-task').value;
+    const date = document.getElementById('todo-date').value;
+    const time = document.getElementById('todo-time').value;
+    const comment = document.getElementById('todo-comment').value;
+
+    if(date === "" || time === "" || task === ""){
         showLists();
         return   
     }else{
-        const toDo = new ToDo('', date.value, time.value, task.value, comment.value);
-        todoList.set(toDo.id, toDo);
-        //localStorage.setItem(toDo.id, JSON.stringify(toDo.id, toDo.task, toDo.comment, toDo.isDone, toDo.dateTime, toDo.dateStr, toDo.timeStr));
-        //console.log(toDoList.allToString());
+        const toDo = new ToDo('', date, time, task, comment);
+
+        if(todoList.size === 0){
+            todoList.add(toDo);
+        }else{
+            let hasId = false;
+            todoList.forEach((item) => { 
+                // console.log(item.id);              
+                if (item.id === toDo.id) {
+                    hasId = true;
+                }
+                return hasId;
+            });
+            
+            // console.log(hasId);
+            if(!hasId) todoList.add(toDo);
+        }
+        
         showLists();
     }
 }
@@ -104,6 +93,7 @@ function showLists(){
     toDoActiveList.sort((a , b) => a.dateTime - b.dateTime);
 
     // Ausgabe
+    const finished = document.getElementById('finished-todo');
     toDoFinishedList.forEach(todoObj => {
         const tmplFin = document.getElementById('finished-todo-template').content.cloneNode(true);
             tmplFin.querySelector('#todo-fin-task').innerText = todoObj.task;
@@ -116,6 +106,7 @@ function showLists(){
             tmplFin.getElementById(`delete-fin-${todoObj.id}`).addEventListener('click', () => deleteTodoObj(todoObj));
             finished.appendChild(tmplFin);
     });
+    const active = document.getElementById('active-todo');
     toDoActiveList.forEach(todoObj => {
         const tmplActive = document.getElementById('active-todo-template').content.cloneNode(true);
             tmplActive.querySelector('#todo-active-task').innerText = todoObj.task;
@@ -127,7 +118,7 @@ function showLists(){
             tmplActive.querySelector('.delete-act').setAttribute('id', `delete-act-${todoObj.id}`);
             tmplActive.getElementById(`delete-act-${todoObj.id}`).addEventListener('click', () => deleteTodoObj(todoObj));
             active.appendChild(tmplActive);
-    })
+    });
 }
 
 // Löschen der Todo-Boxen
@@ -150,9 +141,9 @@ function deleteInputBox(){
 
 // Eventhander für den Buttons Löschen 
 function deleteTodoObj(todo){
-    console.log(todo);
-    if(todoList.has(todo.id) && confirm(`Wollen Sie das Todo: ${todo.task} löschen?`)){
-        todoList.delete(todo.id, todo);
+    // console.log(todo);
+    if(todoList.has(todo) && confirm(`Wollen Sie das Todo: ${todo.task} löschen?`)){
+        todoList.delete(todo);
         saveToDataStorage();
     }
         showLists();   
@@ -160,41 +151,17 @@ function deleteTodoObj(todo){
 
 // Eventhandler für die Checkbox zum Markieren fertig/ nicht fertig
 function changeTodoObjToDoneUndone(todo){
-    //console.log(todo);
-    if (todoList.has(todo.id)) {       
-        todoList.delete(todo.id, todo);
+    // console.log(todo);
+    if (todoList.has(todo)) {       
+        todoList.delete(todo);
         todo.setDoneUndone();
-        console.log(todo);
-        todoList.set(todo.id, todo);
+        // console.log(todo);
+        todoList.add(todo);
         showLists();
     }
 }
 
-// nach dem Parsen der Seite
-window.onload = () => {
-    loadFromDataStorage();
-    showLists();
-}
-
-// Laden und Speichern vom LocalStorage ++++++++++++++++++++++++++++++++++++++
-function loadFromDataStorage(){
-    
-    if(typeof(Storage) !== "undefined" || localStorage.length !== 0){
-        for (let i = 0; i < localStorage.length; i++) {   
-            const {
-                id, 
-                dateStr, 
-                timeStr, 
-                task, 
-                comment, 
-                isDone
-            } = JSON.parse(localStorage.getItem(i));
-            const newToDoObj = new ToDo(id, dateStr, timeStr, task, comment, isDone);                 
-            todoList.set(newToDoObj.id, newToDoObj);              
-        }
-    }
-}
-
+// im LocalStorage des Browsers speichern
 function saveToDataStorage(){
     //localStorage.clear();
     if(typeof(Storage)){
@@ -202,7 +169,6 @@ function saveToDataStorage(){
         todoList.forEach(todoObj => {
             localStorage.setItem(i, todoObj.toString()); //=> localStorage.setItem(i,  JSON.stringify(todoObj));
             i++;
-
         });
     }
 }
