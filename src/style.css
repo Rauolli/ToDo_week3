@@ -1,107 +1,11 @@
-:root{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+body{
+  background-color: rgb(145, 250, 182);
 }
 
-
-*,
-::before,
-::after{
-  box-sizing: inherit;  
+.btn{
+  transition: all 0.4s ease-in-out;
 }
 
-html {
-  font-size: 58%;
-}
-
-
-
-header {
-  font-size: 4rem;
-  min-height: 10vh;
-  display: flex;
-  justify-content: center;
-}
-
-main {
-  max-width: 100vw;
-  min-height: 90vh;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 1em;
-}
-
-.erledigte-Aufgaben {
-  font-size: 1.5rem;
-  text-align: center;
-  border: solid 2px rgba(189, 97, 97, 0.6);
-  border-radius: 0.7em;
-}
-
-.erstellung-Aufgaben {
-  font-size: 1.7rem;
-  border: solid 2px rgba(111, 112, 188, 0.6);
-  border-radius: 0.7em
-}
-
-.aktive-Aufgaben {
-  font-size: 1.5rem;
-  text-align: center;
-  border: solid 2px rgb(76, 138, 87, 0.6);
-  border-radius: 0.7em;
-}
-
-.section-header {
-  display: flex;
-  justify-content: center;
-}
-
-@media screen and (max-width: 730px){
-  main{
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header{
-    font-size: 2rem;
-    min-height: auto;
-    text-align: center;  
-  }
-
-  .erledigte-Aufgaben {
-    order: 2;
-    font-size: 1rem;
-    max-height: 30%;
-  }
-  
-  .erstellung-Aufgaben {
-    font-size: 1.1rem;
-    max-height: 30%;
-  }
-  
-  .aktive-Aufgaben {
-    font-size: 1rem;
-    max-height: 30%;
-  }
-
-  .show-todo-box{
-    min-width: 80%;
-    font-size: 0.8em;
-    margin: 0.4em;
-    padding: 0 0 0.5em 0.5em;
-    border-radius: 0.4em;
-    background-color: rgba(249, 252, 248, 0.9);
-    border: 1px solid darkgray;
-    box-shadow: 2px 4px 6px rgba(82, 103, 82, 0.586);;
-  }
-  .show-todo-box div{
-    font-size: 1.5em;
-  }
-
-  #todo-active-comment,
-  #todo-fin-comment{
-    font-size: 2.2em;
-  }
+.btn:hover{
+  transform: scale(0.9);
 }

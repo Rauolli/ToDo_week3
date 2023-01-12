@@ -1,112 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <link rel="stylesheet" href="./src/ollisStyle.css" />
     <link rel="icon" href="/img/to-do-list.svg" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="./src/style.css" />
+
     <title>To Do - Liste</title>
   </head>
-  <body>
-    <header>
-      <nav>
-        <h1>TO-DO-Liste</h1>
-      </nav>
+  <body> 
+    <header class="row text-bg-dark m-2 rounded-3 text-center">
+      <h1 class="display-3">TO-DO-Liste</h1>
     </header>
-    <main>
-      <section class="erledigte-Aufgaben">
-        <div class="section-header">
-          <h2>Erledigte Aufgaben</h2>
+
+    <main class="container">
+      <div class="row">
+
+          <section class="col-xl-4 card shadow">
+            <header class="row-col-2 text-bg-primary m-2 py-1 rounded-2 text-center">
+              <h2 class="card-title">Erstelle deine Aufgabe</h2>
+            </header>
+            <form class="card-body inputform">        
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="todo-task" placeholder="Task">
+              <label for="todo-task">Aufgabe:</label>
+            </div>  
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="todo-date" placeholder="date">
+              <label for="todo-date">Datum:</label>
+            </div>  
+            <div class="form-floating mb-3">
+              <input type="time" class="form-control" id="todo-time" placeholder="time">
+              <label for="todo-time">Zeit:</label>
+            </div>  
+            <div class="form-floating mb-3">
+              <textarea name="todo-comment" class="form-control" id="todo-comment" rows="5"></textarea>
+              <label for="todo-comment" class="form-label">Kommentar:</label>
+            </div>   
+              <button title="+" type="button" id="btn-todo-add" class="btn btn-outline-success border-2" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+              </button>      
+              <button type="button" title="🗑️" id="btn-todo-delete" class="delete btn btn-outline-danger border-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                </svg>
+              </button>         
+            </form>
+          </section> 
+        
+       
+            <section class="col-lg-6 col-xl-4">
+              <header class="row-cols-1 text-bg-warning my-md-2 py-2 rounded-2 text-center">
+                <h2>Aktive Aufgaben</h2>
+              </header>
+              <article id="active-todo"></article>
+            </section>
+
+            <section class="col-lg-6 col-xl-4">
+              <header class="row-cols-1 text-bg-success my-md-2 py-2 rounded-2 text-center">
+                <h2>Erledigte Aufgaben</h2>
+              </header>
+              <article id="finished-todo" ></article>        
+            </section>
         </div>
-        <!-- Template für Erledigte Aufgaben -->
-        <template id="finished-todo-template">
-          <article class="show-todo-box flex-col ">       
-              <h3 id="todo-fin-task" class="todo-header">Aufgabe</h3>          
-            <div class="flex-row">
-              <div id="todo-fin-date">Datum</div>
-              <div id="todo-fin-time">Zeit</div>
-              <div class="right">
-                <input type="checkbox" class="checkbox-fin symbol-btn material-symbols-outlined green" checked> </input> 
-                <button class="delete-fin symbol-btn material-symbols-outlined red"> delete </button>
-              </div>
+      </main>
+      
+    <!-- Template für einzelne Todo's -->
+    <template id="todo-template">
+      <article class="card todo-box mb-3 shadow border-1">
+          <!-- <img src="./img/backgr-img.jpg" width="300" height="100" class="card-img-top" alt="background">        -->
+          <h3 id="todo-task" class="card-title todo-header px-3 pt-2">Aufgabe</h3>          
+        <div class="card-body flex-row">
+          <div id="todo-date" class="card-text">Datum</div>
+          <div id="todo-time" class="card-text">Zeit</div>
+          <section class="comment card-text">
+            <div id="todo-comment">Komentar</div>
+          </section>               
+            <div class="form-check form-switch">
+              <input class="checkbox form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Erledigt</label>
             </div>
-            <section class="comment">
-            <div id="todo-fin-comment">Komentar</div>
-            </section>        
-          </article>
-        </template>
-        <div id="finished-todo"></div>
-        <!-- Template für Erledigte Aufgaben -->
-      </section>
-      <section class="erstellung-Aufgaben">
-        <div class="section-header">
-          <h2>Erstelle deine Aufgabe</h2>
-        </div>
-        <div class="show-todo-box">        
-        <!--###### Eingabebereich für ToDo ###########-->
-        <!-- <button class="symbol-btn material-symbols-outlined" id="btn-close">close</button> -->
-        <table>        
-          <tr>
-            <td><label for="todo-task">Aufgabe:</label></td>
-            <td><input type="text" id="todo-task" placeholder="To-Do"></td>
-          </tr>         
-          <tr>
-            <td><label for="todo-date">Datum:</label></td>
-            <td><input type="date" id="todo-date"></td>
-          </tr>
-          <tr>
-            <td><label for="todo-time">Zeit:</label></td>
-            <td><input type="time" id="todo-time"></td>
-          </tr>
-          <tr>
-          <td><label for="todo-comment">Kommentar:</label></td>
-          <td><textarea name="todo-comment" id="todo-comment" cols="30" rows="5"></textarea></td> 
-          </tr>      
-        <tr>
-          <td>
-            <button id="btn-todo-add" class="symbol-btn material-symbols-outlined blue"> add </button>        
-            <button  id="btn-todo-delete" class="symbol-btn material-symbols-outlined red"> delete </button>          
-          </td>
-          <td>
-            <div class="column">
-              <label for="btn-todo-save-all" class="save-all-lbl">Save All</label>
-              <button  id="btn-todo-save-all" class="symbol-btn material-symbols-outlined green"> save </button>              
-            </div>
-          </td>
-        </tr>
-      </table>
+            <button type="button" title="🗑️" id="btn-todo-delete" class="delete btn btn-outline-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+              <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+              </svg>
+            </button>
+            <button type="button" title="✏️" id="btn-todo-edit" class="edit btn btn-outline-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+              </svg>
+            </button>                       
+          </div>        
+      </article>
+    </template>
+
+    <div class="container">
+      <div class="row-md-cols-1 my-5 text-center">         
+        <button type="button" id="btn-todo-save-all" class="btn btn-outline-success border-3 fw-bolder"> Save All: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+          <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+        </svg></button>
       </div>
-      </section>
-      <section class="aktive-Aufgaben">
-        <div class="section-header">
-          <h2>Aktive Aufgaben</h2>
-        </div>
-        <!-- Template für aktive Aufgaben -->
-        <template id="active-todo-template">
-          <article class="show-todo-box flex-col ">       
-              <h3 id="todo-active-task" class="todo-header">Aufgabe</h3>          
-            <div class="flex-row">
-              <div id="todo-active-date">Datum</div>
-              <div id="todo-active-time">Zeit</div>
-              <div class="right">                
-                <input type="checkbox" class="checkbox-act symbol-btn material-symbols-outlined green"> </input> 
-                <button class="delete-act symbol-btn material-symbols-outlined red"> delete </button>
-              </div>
-            </div>
-            <section class="comment">
-            <div id="todo-active-comment">Komentar</div>
-            </section>        
-          </article>
-        </template>
-        <div id="active-todo"></div>
-        <!-- Template für aktive Aufgaben -->
-    </main>
+    </div>
     <script type="module" src="./src/index.js"></script>
   </body>
 </html>
